@@ -2,88 +2,85 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.1.0</version>
+		<relativePath/>
+	</parent>
+
 	<groupId>com.github.jay-pople</groupId>
-	<artifactId>jwt-core-library</artifactId>
-	<version>1.0.2</version>
+	<artifactId>jwt-core-library-webflux</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>JWT Core Library</name>
-	<description>Reusable JWT authentication library for Spring Boot applications</description>
+	<description>Reusable JWT authentication library for Spring Boot WebFlux applications</description>
 
 	<properties>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-		<spring.boot.version>3.1.0</spring.boot.version>
+		<java.version>17</java.version>
+		<jjwt.version>0.12.6</jjwt.version>
 	</properties>
 
-
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-
-
 	<dependencies>
-		<!-- Spring Boot Starter Web - provided scope means consuming app must provide it -->
+		<!-- Reactive WebFlux (provided by consuming app) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring.boot.version}</version>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Spring Security - provided scope means consuming app must provide it -->
+		<!-- Spring Security (provided by consuming app) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>${spring.boot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- JWT - compile scope means library includes these dependencies -->
+		<!-- JJWT API & Implementation -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
-			<version>0.12.6</version>
+			<version>${jjwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
-			<version>0.12.6</version>
+			<version>${jjwt.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
-			<version>0.12.6</version>
+			<version>${jjwt.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring Boot Configuration Processor -->
+		<!-- Enables annotation processing for @ConfigurationProperties -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<version>${spring.boot.version}</version>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Compile with Java 17 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

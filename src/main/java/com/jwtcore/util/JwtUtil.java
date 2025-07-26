@@ -1,6 +1,6 @@
 package com.jwtcore.util;
 
-import org.apache.tomcat.util.codec.binary.Base64;
+import java.util.Base64;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -22,7 +22,7 @@ public class JwtUtil {
     }
 
     public SecretKey getDecodedKey() {
-        byte[] decodedKey = Base64.decodeBase64(key);
+        byte[] decodedKey = Base64.getDecoder().decode(key);
         return new SecretKeySpec(decodedKey, "HmacSHA256");
     }
 }
